@@ -1,0 +1,121 @@
+/* Core Layout */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Roboto', arial, sans-serif;
+    overflow: hidden; /* Prevents double scrollbars */
+}
+
+/* Fixed Top Section */
+.doc-header {
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.title-input {
+    font-size: 18px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.title-input:hover {
+    border: 1px solid #dadce0;
+    background: #f1f3f4;
+}
+.title-input:focus {
+    outline: none;
+    border: 1px solid #4285f4;
+    background: white;
+}
+
+/* Toolbar Styling */
+.toolbar {
+    display: flex;
+    padding: 8px 0 0 0;
+    gap: 5px;
+    border-top: 1px solid #eee;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.toolbar button {
+    background: white;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #444;
+    transition: background 0.2s;
+}
+
+.toolbar button:hover {
+    background: #f1f3f4;
+}
+
+/* The Page/Canvas Layout */
+.canvas {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+}
+
+.paper {
+    background: white;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 1in;
+    box-shadow: 0 1px 3px rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+    outline: none;
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    position: relative; /* CRITICAL for remote cursor positioning */
+    cursor: text;
+}
+
+/* Remote Cursor Styling */
+.remote-cursor {
+    position: absolute;
+    width: 2px;
+    height: 1.2em;
+    background-color: #4285f4;
+    pointer-events: none;
+}
+
+.cursor-label {
+    position: absolute;
+    top: -1.4em;
+    left: 0;
+    background: #4285f4;
+    color: white;
+    padding: 1px 6px;
+    font-size: 11px;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+/* Responsive adjust for smaller screens */
+@media (max-width: 9in) {
+    .paper {
+        width: 95%;
+        padding: 0.5in;
+    }
+}

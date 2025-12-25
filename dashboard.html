@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">📄</span>
+            <span>Collaborative Docs</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div id="welcomeUser" style="font-weight: 500; color: #5f6368;"></div>
+            <button onclick="logout()" class="btn btn-secondary btn-sm">Sign Out</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h3 class="section-title" style="margin: 20px 0;">Recent documents</h3>
+        <div id="docGrid" class="doc-grid">
+            <div class="spinner" id="loadingSpinner"></div>
+        </div>
+    </div>
+
+    <div class="fab" onclick="createNewDoc()" title="Create new document">+</div>
+
+    <script>
+        const user = localStorage.getItem('currentUser');
+        if (!user) {
+            window.location.href = '/';
+        } else {
+            document.getElementById('welcomeUser').innerText = user;
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = '/';
+        }
+    </script>
+
+    <script src="/dashboard-script.js"></script>
+</body>
+</html>

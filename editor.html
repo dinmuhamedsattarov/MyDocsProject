@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Doc - Editor</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/editor-style.css">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <style>
+        /* Keeping your core "liked" styles here for immediate priority rendering */
+        body { background-color: #f5f7fa; margin: 0; }
+        .doc-header {
+            background: white;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .title-input {
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px;
+            width: 300px;
+        }
+        .title-input:focus { outline: none; background: #f5f5f5; }
+        .paper {
+            background: white;
+            width: 8.5in;
+            min-height: 11in;
+            padding: 1in;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            outline: none;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+        .toolbar { display: flex; gap: 10px; padding-top: 5px; border-top: 1px solid #eee; margin-top: 5px;}
+        .toolbar-btn { cursor: pointer; background: none; border: 1px solid #ddd; padding: 2px 10px; border-radius: 4px; font-size: 13px; }
+        .toolbar-btn:hover { background: #eee; }
+    </style>
+</head>
+<body>
+    <div class="doc-header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div onclick="window.location.href='/dashboard'" style="cursor: pointer; color: #4285f4; font-weight: bold; display: flex; align-items: center; gap: 5px;">
+                    <span>←</span> Dashboard
+                </div>
+                <input type="text" id="docTitle" value="Loading..." class="title-input">
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span id="status" style="color: #666; font-size: 12px; font-style: italic;"></span>
+                <button onclick="saveDocument()" class="btn btn-primary" style="padding: 8px 16px;">Save</button>
+                <button onclick="shareDocument()" class="btn btn-secondary" style="padding: 8px 16px;">Share</button>
+            </div>
+        </div>
+        <div class="toolbar">
+            <button onclick="formatText('bold')" class="toolbar-btn"><b>B</b></button>
+            <button onclick="formatText('italic')" class="toolbar-btn"><i>I</i></button>
+            <button onclick="formatText('underline')" class="toolbar-btn"><u>U</u></button>
+            <div style="width: 1px; background: #ddd; margin: 0 5px;"></div>
+            <button onclick="formatText('justifyLeft')" class="toolbar-btn">Left</button>
+            <button onclick="formatText('justifyCenter')" class="toolbar-btn">Center</button>
+            <button onclick="formatText('justifyRight')" class="toolbar-btn">Right</button>
+        </div>
+    </div>
+
+    <div class="editor-wrapper" style="padding-bottom: 50px;">
+        <div id="editor" class="paper" contenteditable="true" spellcheck="false"></div>
+    </div>
+
+    <script src="/editor-script.js"></script>
+</body>
+</html>

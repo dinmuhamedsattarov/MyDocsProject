@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Docs | Login</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Keeping your internal styles as a fallback/priority */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #f5f7fa; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .container { width: 100%; max-width: 420px; }
+        .logo { text-align: center; margin-bottom: 40px; }
+        .logo-icon { font-size: 3.5rem; margin-bottom: 10px; }
+        .logo-text { font-size: 2.2rem; font-weight: 700; color: #2d3748; letter-spacing: -0.5px; }
+        .tagline { color: #718096; text-align: center; margin-top: 5px; font-size: 1.1rem; }
+        .card { background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); padding: 40px; border: 1px solid #e2e8f0; }
+        .card-title { font-size: 1.8rem; color: #2d3748; margin-bottom: 8px; text-align: center; font-weight: 600; }
+        .card-subtitle { color: #718096; text-align: center; margin-bottom: 32px; font-size: 1rem; }
+        .input-group { margin-bottom: 24px; }
+        .input-label { display: block; margin-bottom: 8px; color: #4a5568; font-weight: 500; font-size: 0.95rem; }
+        .input-field { width: 100%; padding: 14px 16px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.2s; background-color: #f8fafc; }
+        .input-field:focus { outline: none; border-color: #4299e1; background-color: white; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1); }
+        .password-note { font-size: 0.85rem; color: #a0aec0; margin-top: 6px; margin-left: 4px; }
+        .button { width: 100%; padding: 15px; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
+        .button-primary { background: #4299e1; color: white; }
+        .button-primary:hover:not(:disabled) { background: #3182ce; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(49, 130, 206, 0.2); }
+        .auth-toggle { text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; color: #718096; font-size: 0.95rem; }
+        .auth-link { color: #4299e1; text-decoration: none; font-weight: 600; margin-left: 6px; cursor: pointer; }
+        .message { padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 0.95rem; display: none; }
+        .message-success { background-color: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
+        .message-error { background-color: #fed7d7; color: #742a2a; border: 1px solid #fc8181; }
+        .form-footer { margin-top: 24px; text-align: center; font-size: 0.85rem; color: #a0aec0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">📄</div>
+            <div class="logo-text">Collaborative Docs</div>
+            <div class="tagline">Create and collaborate in real-time</div>
+        </div>
+
+        <div class="card" id="loginCard">
+            <h2 class="card-title">Welcome Back</h2>
+            <p class="card-subtitle">Sign in to access your documents</p>
+            <div class="message" id="loginMessage"></div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label class="input-label">Username</label>
+                    <input type="text" class="input-field" id="loginUsername" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Password</label>
+                    <input type="password" class="input-field" id="loginPassword" placeholder="6-digit password" maxlength="6" required>
+                </div>
+                <button type="submit" class="button button-primary" id="loginButton">Sign In</button>
+            </form>
+            <div class="auth-toggle">
+                Don't have an account? <span class="auth-link" id="showRegister">Create Account</span>
+            </div>
+        </div>
+
+        <div class="card" id="registerCard" style="display: none;">
+            <h2 class="card-title">Create Account</h2>
+            <p class="card-subtitle">Join Collaborative Docs</p>
+            <div class="message" id="registerMessage"></div>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label class="input-label">Username</label>
+                    <input type="text" class="input-field" id="registerUsername" placeholder="Choose a username" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Email Address</label>
+                    <input type="email" class="input-field" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Password</label>
+                    <input type="password" class="input-field" id="registerPassword" placeholder="6-digit password" maxlength="6" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Confirm Password</label>
+                    <input type="password" class="input-field" id="registerConfirmPassword" placeholder="Re-enter password" maxlength="6" required>
+                </div>
+                <button type="submit" class="button button-primary" id="registerButton">Create Account</button>
+            </form>
+            <div class="auth-toggle">
+                Already have an account? <span class="auth-link" id="showLogin">Sign In</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+
+    <script>
+        // Toggle logic
+        document.getElementById('showRegister').addEventListener('click', () => {
+            document.getElementById('loginCard').style.display = 'none';
+            document.getElementById('registerCard').style.display = 'block';
+        });
+        document.getElementById('showLogin').addEventListener('click', () => {
+            document.getElementById('registerCard').style.display = 'none';
+            document.getElementById('loginCard').style.display = 'block';
+        });
+
+        // Numeric constraint for password
+        const pwdFields = document.querySelectorAll('input[type="password"]');
+        pwdFields.forEach(f => f.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 6);
+        }));
+
+        function showMessage(el, text, type) {
+            el.textContent = text;
+            el.className = `message message-${type}`;
+            el.style.display = 'block';
+        }
+
+        // LOGIN
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const msg = document.getElementById('loginMessage');
+
+            const res = await fetch('/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username, password})
+            });
+
+            if (res.ok) {
+                localStorage.setItem('currentUser', username); // CRITICAL for Dashboard
+                showMessage(msg, 'Redirecting...', 'success');
+                setTimeout(() => window.location.href = '/dashboard', 800);
+            } else {
+                showMessage(msg, 'Invalid credentials', 'error');
+            }
+        });
+
+        // REGISTER
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerConfirmPassword').value;
+            const msg = document.getElementById('registerMessage');
+
+            if (password !== confirm) return showMessage(msg, 'Passwords mismatch', 'error');
+
+            const res = await fetch('/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username, password})
+            });
+
+            if (res.ok) {
+                showMessage(msg, 'Success! Please sign in.', 'success');
+                setTimeout(() => document.getElementById('showLogin').click(), 1500);
+            } else {
+                showMessage(msg, 'Registration failed', 'error');
+            }
+        });
+    </script>
+</body>
+</html>
