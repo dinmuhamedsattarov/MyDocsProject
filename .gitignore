@@ -15,3 +15,8 @@ venv/
 .idea/
 /shelf/
 /workspace.xml
+
+.idea/
+output.log
+database.db
+__pycache__/
