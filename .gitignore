@@ -1,0 +1,17 @@
+# Database
+database.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment/OS
+.DS_Store
+.env
+venv/
+
+# IDE
+.vscode/
+.idea/
+/shelf/
+/workspace.xml
