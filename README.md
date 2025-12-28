@@ -15,7 +15,14 @@ A lightweight, real-time collaborative document editor inspired by Google Docs. 
 - **Backend**: Python (Flask)
 - **Real-time Communication**: Flask-SocketIO (WebSockets)
 - **Database**: SQLite3
-- **Frontend**: HTML5, CSS3 (Google Docs UI style), Vanilla JavaScript
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+
+## 🗄️ Database Management
+The project uses a persistent **SQLite** database (`database.db`). 
+For manual data inspection:
+1. Open **DBeaver**.
+2. Create a new SQLite connection.
+3. Point the file path to `database.db` in the project folder.
 
 ## 📦 Installation & Setup
 
@@ -23,29 +30,25 @@ A lightweight, real-time collaborative document editor inspired by Google Docs. 
    ```bash
    git clone [https://github.com/YOUR_USERNAME/CollaborativeDocs.git](https://github.com/YOUR_USERNAME/CollaborativeDocs.git)
    cd CollaborativeDocs
-Install Dependencies: Ensure you have Python installed, then run:
+Install Dependencies:
 
 Bash
 
 pip install flask flask-socketio
-Initialize the Database: The app will automatically create database.db on its first run.
-
 Run the Application:
 
 Bash
 
 python app.py
-Access the App: Open your browser and navigate to http://127.0.0.1:5000
+Access the App: Open http://127.0.0.1:5000 in your browser.
 
 📂 Project Structure
-app.py: The Flask server, API routes, and Socket.io event handling.
+app.py: Flask server & Socket.io logic.
 
-index.html: The login/registration gateway.
+index.html: Login/Registration page.
 
-dashboard.html: User home where documents are managed.
+dashboard.html: Document management hub.
 
-editor.html: The collaborative workspace.
+editor.html: Collaborative workspace.
 
-editor-script.js: Handles real-time text and cursor logic.
-
-editor-style.css: The "Google Docs" paginated look and feel.
+editor-script.js: Real-time text and cursor syncing.
