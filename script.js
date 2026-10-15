@@ -27,8 +27,6 @@ if (loginForm) {
             });
 
             if (response.ok) {
-                // Save session for Dashboard and Editor
-                localStorage.setItem('currentUser', username);
                 showMessage('loginMessage', 'Success! Redirecting...', 'success');
                 setTimeout(() => {
                     window.location.href = '/dashboard';

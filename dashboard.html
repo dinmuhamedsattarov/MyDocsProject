@@ -8,15 +8,13 @@
     <link rel="stylesheet" href="/dashboard.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <span class="logo-icon">📄</span>
-            <span>Collaborative Docs</span>
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background-color: #ffffff; border-bottom: 1px solid #e0e0e0; margin-bottom: 20px;">
+        <div style="font-weight: 600; font-size: 16px; color: #333;">
+            User: {{ username }}
         </div>
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <div id="welcomeUser" style="font-weight: 500; color: #5f6368;"></div>
-            <button onclick="logout()" class="btn btn-secondary btn-sm">Sign Out</button>
-        </div>
+        <a href="/logout" style="padding: 8px 16px; background-color: #d93025; color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: background-color 0.2s;">
+            Sign Out
+        </a>
     </nav>
 
     <div class="main-content">

@@ -1,22 +1,14 @@
-// --- Session Control ---
-const currentUser = localStorage.getItem('currentUser');
-
-// Redirect to login if the session is missing
-if (!currentUser) {
-    window.location.href = '/';
-}
-
 // --- Dashboard Logic ---
 
 /**
- * Fetches all documents owned by or shared with the current user.
- * Clears the loading spinner and populates the docGrid.
+ * Fetches all documents owned by or shared with the current user using the secure session cookie.
  */
 async function loadDocuments() {
     const grid = document.getElementById('docGrid');
 
     try {
-        const response = await fetch(`/api/my_docs/${currentUser}`);
+        // Securely fetch docs. No username in the URL; the server reads the Cookie!
+        const response = await fetch('/api/my_docs');
         const docs = await response.json();
 
         // Clear spinner
@@ -48,8 +40,7 @@ async function loadDocuments() {
 }
 
 /**
- * Triggers a prompt for a new document title and calls the API.
- * Redirects to the specific editor page on success.
+ * Triggers a prompt for a new document title and calls the secure API.
  */
 async function createNewDoc() {
     const title = prompt("Enter Document Title:");
@@ -59,9 +50,9 @@ async function createNewDoc() {
         const response = await fetch('/api/create_doc', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            // Removed the username here! The server reads the Session Cookie instead.
             body: JSON.stringify({
-                title: title.trim(),
-                username: currentUser
+                title: title.trim()
             })
         });
 
@@ -79,7 +70,7 @@ async function createNewDoc() {
 
 /**
  * Deletes a document by ID.
- * @param {number} id - The document primary key.
+ * @param {number} id The document primary key.
  */
 async function deleteDoc(id) {
     if (!confirm("Delete this document permanently?")) return;
